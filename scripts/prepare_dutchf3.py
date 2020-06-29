@@ -149,10 +149,8 @@ def split_patch_train_val(
     iline, xline, depth = labels.shape
 
     # since the values we will save will reference the padded volume, we will increase
-    # the size of the volume by the padding amount (2*patch_size). Note that the resulting
+    # the depth of the volume by the padding amount (2*patch_size). Note that the resulting
     # locations correspond to the padded volume, not the original one.
-    iline += 2 * patch_size
-    xline += 2 * patch_size
     depth += 2 * patch_size
 
     split_direction = split_direction.lower()

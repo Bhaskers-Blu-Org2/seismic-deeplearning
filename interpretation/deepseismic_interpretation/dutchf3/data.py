@@ -454,13 +454,19 @@ class PatchLoader(data.Dataset):
 
     def pad_volume(self, volume, value):
         """
-        Pads a 3D numpy array with a constant value.
+        Pads a 3D numpy array with a constant value along the depth direction only. 
 
         Args:
             volume (numpy ndarrray): numpy array containing the seismic amplitude or labels. 
             value (int): value to pad the array with. 
         """
-        return np.pad(volume, pad_width=self.patch_size, mode="constant", constant_values=value)
+
+        return np.pad(
+            volume,
+            pad_width=[(0, 0), (0, 0), (self.patch_size, self.patch_size)],
+            mode="constant",
+            constant_values=value,
+        )
 
     def __len__(self):
         return len(self.patches)
